@@ -6,7 +6,6 @@ class EnvioDoFormulario {
 
     evento() {
         this.formulario.addEventListener('submit', e => {
-            //console.log(e)
             this.handleSubmit(e)
         })
     }
@@ -14,10 +13,13 @@ class EnvioDoFormulario {
     handleSubmit(e) {
         e.preventDefault()
         const camposValidos = this.camposValidos()
+        if(!camposValidos) return console.log('falso')
     }
 
     camposValidos() {
         let valid = true
+        
+        return valid
     }
 }
 
