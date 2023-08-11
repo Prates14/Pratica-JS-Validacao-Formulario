@@ -29,14 +29,39 @@ class EnvioDoFormulario {
             }
 
             if(campo.classList.contains('cpf')) {
-                const cpfUsuario = new EnvioDoCpf(campo.value)
-                if(!cpfUsuario.AvaliarCpf()) {
-                    this.criaError(campo, `CPF inválido`)
-                    valid = false
-                }
+                if(!this.validarCpf(campo)) valid = false
+            }
+
+            if(campo.classList.contains('usuario')) {
+                if(!this.validarUsuario(campo)) valid = false
             }
         }
 
+        return valid
+    }
+
+    validarUsuario(campo) {
+        let valid = true
+        const usuario = campo.value
+        if(usuario.length < 3 || usuario.length > 12) {
+            this.criaError(campo, 'O usuário deverá ter entre 3 e 12 caracteres.')
+            valid = false
+        }
+
+        if(!usuario.match(/^[a-zA-Z0-9]+$/g)) {
+            this.criaError(campo, 'O usuário só pode conter letras e/ou números.')
+            valid = false
+        }
+        return valid
+    }
+
+    validarCpf(campo) {
+        const cpfUsuario = new EnvioDoCpf(campo.value)
+        let valid = true
+        if(!cpfUsuario.AvaliarCpf()) {
+            this.criaError(campo, `CPF inválido`)
+            valid = false
+        }
         return valid
     }
 
