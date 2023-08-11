@@ -9,7 +9,7 @@ class EnvioDoFormulario {
             this.handleSubmit(e)
         })
     }
-
+//Condição para envio do formulário
     handleSubmit(e) {
         e.preventDefault()
         const camposValidos = this.camposValidos()
@@ -18,28 +18,28 @@ class EnvioDoFormulario {
             this.formulario.submit()
         }
     }
-
+//Validação de todos os campos do formulário
     camposValidos() {
         let valid = true
 
         for (const errorText of this.formulario.querySelectorAll('.error-text')) {
             errorText.remove()
         }
-
+//Validação geral dos campos
         for (const campo of document.querySelectorAll('.validar')) {
             if (!campo.value) {
                 this.criaError(campo, `O campo "${campo.previousElementSibling.innerHTML}" não pode estar vazio.`)
                 valid = false
             }
-
+//Validação do CPF
             if (campo.classList.contains('cpf')) {
                 if (!this.validarCpf(campo)) valid = false
             }
-
+//Validação do nome de usuário
             if (campo.classList.contains('usuario')) {
                 if (!this.validarUsuario(campo)) valid = false
             }
-
+//Validação da senha e repetir-senha
             if (campo.classList.contains('senha')) {
                 if (!this.validarSenhas(campo)) valid = false
             }
